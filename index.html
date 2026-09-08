@@ -412,10 +412,11 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         <span>Education</span>
       </button>
-      <button type="button" data-target="projects">
+      <!-- Projects tab hidden until the section has real content. -->
+      <!-- <button type="button" data-target="projects">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h6l2 2h10v12H3zM3 6V4h6"/></svg>
         <span>Projects</span>
-      </button>
+      </button> -->
       <button type="button" data-target="contact">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h20v14H2zM2 6l10 6 10-6"/></svg>
         <span>Contact</span>
@@ -618,7 +619,7 @@
       </div>
     </section>
 
-    <!-- ================= projects ================= -->
+    <!-- ================= projects (hidden — see nav) ================= -->
     <section class="panel" id="projects">
       <div class="panel-inner">
         <div class="eyebrow">Projects</div>
@@ -726,7 +727,9 @@
   const panels = document.querySelectorAll('.panel');
 
   function show(id) {
-    if (!document.getElementById(id)) id = 'about';
+    // Only sections with a nav button are reachable; a hidden tab's hash
+    // falls back to about.
+    if (!document.querySelector('.nav button[data-target="' + id + '"]')) id = 'about';
     panels.forEach(p => p.toggleAttribute('data-active', p.id === id));
     buttons.forEach(b => {
       if (b.dataset.target === id) b.setAttribute('aria-current', 'page');
